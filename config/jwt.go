@@ -6,5 +6,6 @@ var JWT_KEY = []byte("ac815f8cf395c268a004fedec9efbd6788965ce5d237ff5d31b47eaca3
 
 type JWTClaim struct {
 	Email string
+	ID    uint
 	jwt.RegisteredClaims
 }

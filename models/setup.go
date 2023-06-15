@@ -16,7 +16,7 @@ func ConnectPostgreSQL() {
 		log.Error(err)
 	}
 
-	db.AutoMigrate(&TodoItem{})
+	db.AutoMigrate(&User{}, &TodoItem{})
 
 	DB = db
 }
