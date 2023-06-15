@@ -1,6 +1,7 @@
 package middlewares
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/golang-jwt/jwt/v4"
@@ -47,6 +48,8 @@ func JWTMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
+		ctx := context.WithValue(r.Context(), config.ContextUserKey, claims.Email)
+		r = r.WithContext(ctx)
 		next.ServeHTTP(w, r)
 
 	})
