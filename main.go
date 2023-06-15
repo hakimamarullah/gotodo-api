@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+
+	"encoding/json"
 
 	"github.com/gorilla/mux"
 	"github.com/gotodo/controllers/todocontroller"
@@ -22,6 +25,7 @@ const (
 	BATCH_TODOS = "/batch/todos"
 )
 
+
 func init() {
 	PORT = os.Getenv("PORT")
 	if PORT == "" {
@@ -36,6 +40,7 @@ func main() {
 
 	log.Info("GoTodo API is up and running!")
 	router := mux.NewRouter()
+
 
 	router.HandleFunc("/", todocontroller.Home)
 
