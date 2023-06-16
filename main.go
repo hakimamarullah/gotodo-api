@@ -10,6 +10,7 @@ import (
 	"github.com/gotodo/controllers/todocontroller"
 	"github.com/gotodo/middlewares"
 	"github.com/gotodo/models"
+	"github.com/rs/cors"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -51,7 +52,8 @@ func main() {
 	api.HandleFunc(TODOS_ID, todocontroller.UpdateTodoById).Methods(http.MethodPut)
 	api.HandleFunc(BATCH_TODOS, todocontroller.BatchDeleteByIds).Methods(http.MethodDelete)
 
+	handler := cors.AllowAll().Handler(router)
 	fmt.Printf("Server up and running on port %s\n", PORT)
-	http.ListenAndServe(fmt.Sprintf("127.0.0.1:%s", PORT), router)
+	http.ListenAndServe(fmt.Sprintf("127.0.0.1:%s", PORT), handler)
 
 }
